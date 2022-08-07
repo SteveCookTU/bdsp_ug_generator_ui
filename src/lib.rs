@@ -139,7 +139,6 @@ impl Default for BDSPUgGeneratorUI {
             available_egg_moves: vec![],
             results: vec![],
             error: "",
-
         }
     }
 }
@@ -701,7 +700,9 @@ impl eframe::App for BDSPUgGeneratorUI {
                                         };
 
                                         let mut rng = XorShift::from_state([s0, s1, s2, s3]);
-                                        rng.advance(self.min_advances as usize + self.delay as usize);
+                                        rng.advance(
+                                            self.min_advances as usize + self.delay as usize,
+                                        );
                                         let results = run_results(
                                             self.max_advances,
                                             rng,
@@ -981,7 +982,6 @@ impl eframe::App for BDSPUgGeneratorUI {
     }
 }
 
-
 #[cfg(target_arch = "wasm32")]
 #[wasm_bindgen]
 pub fn start(canvas_id: &str) -> Result<(), eframe::wasm_bindgen::JsValue> {
@@ -991,5 +991,8 @@ pub fn start(canvas_id: &str) -> Result<(), eframe::wasm_bindgen::JsValue> {
     // Redirect tracing to console.log and friends:
     tracing_wasm::set_as_global_default();
 
-    eframe::start_web(canvas_id, Box::new(|cc| Box::new(BDSPUgGeneratorUI::new(cc))))
+    eframe::start_web(
+        canvas_id,
+        Box::new(|cc| Box::new(BDSPUgGeneratorUI::new(cc))),
+    )
 }
