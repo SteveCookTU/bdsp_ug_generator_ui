@@ -215,12 +215,12 @@ impl eframe::App for BDSPUgGeneratorUI {
                                         )
                                         .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.version,
-                                            Version::SP,
-                                            "Shining Pearl",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.version,
+                                                Version::SP,
+                                                "Shining Pearl",
+                                            )
+                                            .clicked()
                                     {
                                         self.available_pokemon = available_pokemon(
                                             self.version,
@@ -244,40 +244,40 @@ impl eframe::App for BDSPUgGeneratorUI {
                                         )
                                         .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.story_flag,
-                                            StoryFlag::StrengthObtained,
-                                            StoryFlag::StrengthObtained.get_str(),
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.story_flag,
+                                                StoryFlag::StrengthObtained,
+                                                StoryFlag::StrengthObtained.get_str(),
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.story_flag,
-                                            StoryFlag::DefogObtained,
-                                            StoryFlag::DefogObtained.get_str(),
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.story_flag,
+                                                StoryFlag::DefogObtained,
+                                                StoryFlag::DefogObtained.get_str(),
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.story_flag,
-                                            StoryFlag::SevenBadges,
-                                            StoryFlag::SevenBadges.get_str(),
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.story_flag,
+                                                StoryFlag::SevenBadges,
+                                                StoryFlag::SevenBadges.get_str(),
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.story_flag,
-                                            StoryFlag::WaterfallObtained,
-                                            StoryFlag::WaterfallObtained.get_str(),
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.story_flag,
+                                                StoryFlag::WaterfallObtained,
+                                                StoryFlag::WaterfallObtained.get_str(),
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.story_flag,
-                                            StoryFlag::NationalDex,
-                                            StoryFlag::NationalDex.get_str(),
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.story_flag,
+                                                StoryFlag::NationalDex,
+                                                StoryFlag::NationalDex.get_str(),
+                                            )
+                                            .clicked()
                                     {
                                         self.available_pokemon = available_pokemon(
                                             self.version,
@@ -320,124 +320,124 @@ impl eframe::App for BDSPUgGeneratorUI {
                                         )
                                         .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::GrasslandCave,
-                                            "Grassland Cave",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::GrasslandCave,
+                                                "Grassland Cave",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::FountainspringCave,
-                                            "Fountainspring Cave",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::FountainspringCave,
+                                                "Fountainspring Cave",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::RockyCave,
-                                            "Rocky Cave",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::RockyCave,
+                                                "Rocky Cave",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::VolcanicCave,
-                                            "Volcanic Cave",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::VolcanicCave,
+                                                "Volcanic Cave",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::SwampyCave,
-                                            "Swampy Cave",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::SwampyCave,
+                                                "Swampy Cave",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::DazzlingCave,
-                                            "Dazzling Cave",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::DazzlingCave,
+                                                "Dazzling Cave",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::WhiteoutCave,
-                                            "Whiteout Cave",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::WhiteoutCave,
+                                                "Whiteout Cave",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::IcyCave,
-                                            "Icy Cave",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::IcyCave,
+                                                "Icy Cave",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::RiverbankCave,
-                                            "Riverbank Cave",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::RiverbankCave,
+                                                "Riverbank Cave",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::SandsearCave,
-                                            "Sandsear Cave",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::SandsearCave,
+                                                "Sandsear Cave",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::StillWaterCavern,
-                                            "Still Water Cavern",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::StillWaterCavern,
+                                                "Still Water Cavern",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::SunlitCavern,
-                                            "Sunlit Cavern",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::SunlitCavern,
+                                                "Sunlit Cavern",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::BigBluffCavern,
-                                            "Big Bluff Cavern",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::BigBluffCavern,
+                                                "Big Bluff Cavern",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::StargleamCavern,
-                                            "Stargleam Cavern",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::StargleamCavern,
+                                                "Stargleam Cavern",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::GlacialCavern,
-                                            "Glacial Cavern",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::GlacialCavern,
+                                                "Glacial Cavern",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::BogsunkCavern,
-                                            "Bogsunk Cavern",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::BogsunkCavern,
+                                                "Bogsunk Cavern",
+                                            )
+                                            .clicked()
                                         || ui
-                                        .selectable_value(
-                                            &mut self.room,
-                                            RoomType::TyphloCavern,
-                                            "Typhlo Cavern",
-                                        )
-                                        .clicked()
+                                            .selectable_value(
+                                                &mut self.room,
+                                                RoomType::TyphloCavern,
+                                                "Typhlo Cavern",
+                                            )
+                                            .clicked()
                                     {
                                         self.available_pokemon = available_pokemon(
                                             self.version,
@@ -652,7 +652,7 @@ impl eframe::App for BDSPUgGeneratorUI {
                                         let filter = Filter {
                                             shiny: self.shiny,
                                             species: if let Some(personal_info) =
-                                            &self.personal_info
+                                                &self.personal_info
                                             {
                                                 Some(personal_info.get_species() as u16)
                                             } else {
@@ -700,7 +700,7 @@ impl eframe::App for BDSPUgGeneratorUI {
                                         for result in results {
                                             for pokemon in result.regular_pokemon {
                                                 let personal_info = if let Some(personal_info) =
-                                                &self.personal_info
+                                                    &self.personal_info
                                                 {
                                                     *personal_info
                                                 } else {
@@ -721,7 +721,8 @@ impl eframe::App for BDSPUgGeneratorUI {
                                                     };
 
                                                 self.results.push((
-                                                    (result.advance + self.min_advances).to_string(),
+                                                    (result.advance + self.min_advances)
+                                                        .to_string(),
                                                     format!("{:X}", pokemon.pid),
                                                     SPECIES_EN[pokemon.species as usize],
                                                     if pokemon.shiny { "!!!" } else { "X" },
@@ -743,7 +744,7 @@ impl eframe::App for BDSPUgGeneratorUI {
 
                                             if let Some(pokemon) = result.rare_pokemon {
                                                 let personal_info = if let Some(personal_info) =
-                                                &self.personal_info
+                                                    &self.personal_info
                                                 {
                                                     *personal_info
                                                 } else {
@@ -764,7 +765,8 @@ impl eframe::App for BDSPUgGeneratorUI {
                                                     };
 
                                                 self.results.push((
-                                                    (result.advance + self.min_advances).to_string(),
+                                                    (result.advance + self.min_advances)
+                                                        .to_string(),
                                                     format!("{:X}", pokemon.pid),
                                                     SPECIES_EN[pokemon.species as usize],
                                                     if pokemon.shiny { "!!!" } else { "X" },

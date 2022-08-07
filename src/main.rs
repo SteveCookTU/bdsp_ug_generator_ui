@@ -1,6 +1,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-use eframe::egui::vec2;
 use bdsp_ug_generator_ui::BDSPUgGeneratorUI;
+use eframe::egui::vec2;
 
 fn main() {
     let mut native_options = eframe::NativeOptions::default();
