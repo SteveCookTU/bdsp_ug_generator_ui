@@ -2,7 +2,10 @@
 use bdsp_ug_generator_ui::BDSPUgGeneratorUI;
 use eframe::egui::vec2;
 
+#[cfg(not(target_arch = "wasm32"))]
 fn main() {
+    tracing_subscriber::fmt::init();
+
     let mut native_options = eframe::NativeOptions::default();
     native_options.vsync = false;
     native_options.resizable = false;

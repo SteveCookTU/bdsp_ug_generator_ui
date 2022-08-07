@@ -9,6 +9,9 @@ use eframe::{egui, CreationContext, Frame};
 use egui_extras::{Size, TableBuilder};
 use lazy_static::lazy_static;
 
+#[cfg(target_arch = "wasm32")]
+use eframe::wasm_bindgen::{self, prelude::*};
+
 const GENDER_SYMBOLS: [&str; 3] = ["♂", "♀", "-"];
 const SPECIES_EN_RAW: &str = include_str!("../resources/text/other/en/species_en.txt");
 const ABILITIES_EN_RAW: &str = include_str!("../resources/text/other/en/abilities_en.txt");
@@ -965,4 +968,17 @@ impl eframe::App for BDSPUgGeneratorUI {
         });
         frame.set_window_size(ctx.used_size());
     }
+}
+
+
+#[cfg(target_arch = "wasm32")]
+#[wasm_bindgen]
+pub fn start(canvas_id: &str) -> Result<(), eframe::wasm_bindgen::JsValue> {
+    // Make sure panics are logged using `console.error`.
+    console_error_panic_hook::set_once();
+
+    // Redirect tracing to console.log and friends:
+    tracing_wasm::set_as_global_default();
+
+    eframe::start_web(canvas_id, Box::new(|cc| Box::new(BDSPUgGeneratorUI::new(cc))))
 }
