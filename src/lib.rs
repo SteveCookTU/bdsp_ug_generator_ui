@@ -73,6 +73,7 @@ pub struct BDSPUgGeneratorUI {
     s3: String,
     min_advances: u32,
     max_advances: u32,
+    delay: u32,
     min_ivs: [u8; 6],
     max_ivs: [u8; 6],
     version: Version,
@@ -80,6 +81,7 @@ pub struct BDSPUgGeneratorUI {
     room: RoomType,
     diglett_mode: bool,
     shiny: bool,
+    exclusive: bool,
     gender: Option<u8>,
     ability: Option<u8>,
     egg_move: Option<u16>,
@@ -118,6 +120,7 @@ impl Default for BDSPUgGeneratorUI {
             s3: "".to_string(),
             min_advances: 0,
             max_advances: 10000,
+            delay: 0,
             min_ivs: [0, 0, 0, 0, 0, 0],
             max_ivs: [31, 31, 31, 31, 31, 31],
             version: Version::BD,
@@ -125,6 +128,7 @@ impl Default for BDSPUgGeneratorUI {
             room: RoomType::SpaciousCave,
             diglett_mode: false,
             shiny: false,
+            exclusive: false,
             gender: None,
             ability: None,
             egg_move: None,
@@ -135,6 +139,7 @@ impl Default for BDSPUgGeneratorUI {
             available_egg_moves: vec![],
             results: vec![],
             error: "",
+
         }
     }
 }
@@ -200,6 +205,9 @@ impl eframe::App for BDSPUgGeneratorUI {
                             ui.end_row();
                             ui.label("Max Advances");
                             ui.add(egui::DragValue::new(&mut self.max_advances));
+                            ui.end_row();
+                            ui.label("Delay");
+                            ui.add(egui::DragValue::new(&mut self.delay));
                             ui.end_row();
 
                             ui.label("Version");
@@ -645,6 +653,9 @@ impl eframe::App for BDSPUgGeneratorUI {
                                     }
                                 });
                             ui.end_row();
+                            ui.label("Exclusive Search");
+                            ui.checkbox(&mut self.exclusive, "");
+                            ui.end_row();
                         });
                     if ui.button("Search").clicked() {
                         if let Ok(s0) = u32::from_str_radix(&self.s0, 16) {
@@ -686,11 +697,11 @@ impl eframe::App for BDSPUgGeneratorUI {
                                             item: self.item,
                                             egg_move: self.egg_move,
                                             gender: self.gender,
-                                            exclusive: false,
+                                            exclusive: self.exclusive,
                                         };
 
                                         let mut rng = XorShift::from_state([s0, s1, s2, s3]);
-                                        rng.advance(self.min_advances as usize);
+                                        rng.advance(self.min_advances as usize + self.delay as usize);
                                         let results = run_results(
                                             self.max_advances,
                                             rng,
