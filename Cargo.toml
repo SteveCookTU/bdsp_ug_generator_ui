@@ -1,0 +1,12 @@
+[package]
+name = "bdsp_ug_generator_ui"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+eframe = "0.18.0"
+bdsp_ug_generator = { git = "https://github.com/SteveCookTU/bdsp_ug_generator", rev = "2537a91"}
+lazy_static = "1.4.0"
+egui_extras = "0.18.0"
