@@ -26,6 +26,6 @@ tracing-wasm = "0.2"
 
 [dependencies]
 eframe = {version = "0.18.0", features = ["persistence"] }
-bdsp_ug_generator = { git = "https://github.com/SteveCookTU/bdsp_ug_generator", rev = "2537a91"}
+bdsp_ug_generator = { git = "https://github.com/SteveCookTU/bdsp_ug_generator", rev = "4c2ca79"}
 lazy_static = "1.4.0"
 egui_extras = "0.18.0"

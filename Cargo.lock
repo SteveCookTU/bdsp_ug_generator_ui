@@ -83,7 +83,7 @@ checksum = "904dfeac50f3cdaba28fc6f57fdcddb75f49ed61346676a78c4ffe55877802fd"
 [[package]]
 name = "bdsp_ug_generator"
 version = "0.2.3"
-source = "git+https://github.com/SteveCookTU/bdsp_ug_generator?rev=2537a91#2537a9193c98947959f0273e2afb86d7a8bc9a38"
+source = "git+https://github.com/SteveCookTU/bdsp_ug_generator?rev=4c2ca79#4c2ca7942d5f73a9564fdc1b48c09f5e6231b850"
 dependencies = [
  "lazy_static",
  "serde",
