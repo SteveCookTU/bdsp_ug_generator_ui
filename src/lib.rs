@@ -661,7 +661,6 @@ impl eframe::App for BDSPUgGeneratorUI {
                             if let Ok(s1) = u32::from_str_radix(&self.s1, 16) {
                                 if let Ok(s2) = u32::from_str_radix(&self.s2, 16) {
                                     if let Ok(s3) = u32::from_str_radix(&self.s3, 16) {
-                                        self.results = vec![];
                                         let filter = Filter {
                                             shiny: self.shiny,
                                             species: if let Some(personal_info) =
@@ -712,6 +711,14 @@ impl eframe::App for BDSPUgGeneratorUI {
                                             filter,
                                             self.diglett_mode,
                                         );
+                                        let mut count = 0;
+                                        for result in results.iter() {
+                                            count += result.regular_pokemon.len();
+                                            if result.rare_pokemon.is_some() {
+                                                count += 1;
+                                            }
+                                        }
+                                        self.results = Vec::with_capacity(count);
                                         for result in results {
                                             for pokemon in result.regular_pokemon {
                                                 let personal_info = if let Some(personal_info) =
