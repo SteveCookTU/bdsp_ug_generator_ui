@@ -21,8 +21,7 @@ fn main() {
 }
 
 #[cfg(target_arch = "wasm32")]
-#[wasm_bindgen]
-pub fn main() -> Result<(), eframe::wasm_bindgen::JsValue> {
+fn main() {
     // Make sure panics are logged using `console.error`.
     console_error_panic_hook::set_once();
 
@@ -33,7 +32,7 @@ pub fn main() -> Result<(), eframe::wasm_bindgen::JsValue> {
     eframe::start_web(
         "bdsp_ug_generator", // hardcode it
         web_options,
-        Box::new(|cc| Box::new(eframe_template::TemplateApp::new(cc))),
+        Box::new(|cc| Box::new(BDSPUgGeneratorUI::new(cc))),
     )
     .expect("failed to start eframe");
 }
