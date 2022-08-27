@@ -2,6 +2,9 @@
 use bdsp_ug_generator_ui::BDSPUgGeneratorUI;
 use eframe::egui::vec2;
 
+#[cfg(target_arch = "wasm32")]
+use eframe::wasm_bindgen::{self, prelude::*};
+
 #[cfg(not(target_arch = "wasm32"))]
 fn main() {
     tracing_subscriber::fmt::init();
@@ -15,4 +18,22 @@ fn main() {
         native_options,
         Box::new(|cc| Box::new(BDSPUgGeneratorUI::new(cc))),
     );
+}
+
+#[cfg(target_arch = "wasm32")]
+#[wasm_bindgen]
+pub fn main() -> Result<(), eframe::wasm_bindgen::JsValue> {
+    // Make sure panics are logged using `console.error`.
+    console_error_panic_hook::set_once();
+
+    // Redirect tracing to console.log and friends:
+    tracing_wasm::set_as_global_default();
+
+    let web_options = eframe::WebOptions::default();
+    eframe::start_web(
+        "bdsp_ug_generator", // hardcode it
+        web_options,
+        Box::new(|cc| Box::new(eframe_template::TemplateApp::new(cc))),
+    )
+    .expect("failed to start eframe");
 }
