@@ -1,4 +1,5 @@
 use bdsp_ug_generator::personal_info_bdsp::PersonalInfoBDSP;
+use bdsp_ug_generator::statues::{get_statue_data, Statue, StatueConfig};
 use bdsp_ug_generator::xorshift::XorShift;
 use bdsp_ug_generator::{
     available_pokemon, get_available_egg_moves, personal_table, run_results, Filter, RoomType,
@@ -87,6 +88,10 @@ pub struct BDSPUgGeneratorUI {
     personal_info: Option<&'static PersonalInfoBDSP>,
     available_pokemon: Vec<u16>,
     available_egg_moves: Vec<u16>,
+    show_statues: bool,
+    statue_data: Vec<(String, Statue)>,
+    selected_statue: Option<usize>,
+    statue_config: StatueConfig,
     results: Vec<(
         String,
         String,
@@ -110,6 +115,21 @@ pub struct BDSPUgGeneratorUI {
 
 impl Default for BDSPUgGeneratorUI {
     fn default() -> Self {
+        let statue_data_raw = get_statue_data();
+
+        let mut statue_data = statue_data_raw
+            .into_iter()
+            .map(|s| {
+                if s.rarity == 1 {
+                    (SPECIES_EN[s.mons_id].to_string(), s)
+                } else {
+                    (format!("{} - Rare", SPECIES_EN[s.mons_id]), s)
+                }
+            })
+            .collect::<Vec<(String, Statue)>>();
+
+        statue_data.sort_by(|s1, s2| s1.0.cmp(&s2.0));
+
         Self {
             s0: "".to_string(),
             s1: "".to_string(),
@@ -134,6 +154,10 @@ impl Default for BDSPUgGeneratorUI {
             personal_info: None,
             available_pokemon: available_pokemon(Version::BD, 6, RoomType::SpaciousCave),
             available_egg_moves: vec![],
+            show_statues: false,
+            statue_data,
+            selected_statue: None,
+            statue_config: StatueConfig::default(),
             results: vec![],
             error: "",
         }
@@ -149,6 +173,73 @@ impl BDSPUgGeneratorUI {
 
 impl eframe::App for BDSPUgGeneratorUI {
     fn update(&mut self, ctx: &Context, _frame: &mut Frame) {
+        if self.show_statues {
+            egui::Window::new("Statue Config").show(ctx, |ui| {
+                egui::ComboBox::new("statues", "")
+                    .selected_text(if let Some(index) = self.selected_statue.as_ref() {
+                        &self.statue_data[*index].0
+                    } else {
+                        "None"
+                    })
+                    .width(155.0)
+                    .show_ui(ui, |ui| {
+                        ui.selectable_value(&mut self.selected_statue, None, "None");
+                        self.statue_data
+                            .iter()
+                            .enumerate()
+                            .for_each(|(index, (name, _))| {
+                                ui.selectable_value(
+                                    &mut self.selected_statue,
+                                    Some(index),
+                                    name.as_str(),
+                                );
+                            });
+                    });
+                ui.horizontal(|ui| {
+                    if ui.button("Add").clicked() {
+                        if let Some(index) = self.selected_statue.as_ref() {
+                            self.statue_config.add_statue(self.statue_data[*index].1);
+                        }
+                    }
+
+                    if ui.button("Remove Last").clicked() {
+                        self.statue_config.statues.pop();
+                    }
+
+                    if ui.button("Close").clicked() {
+                        self.show_statues = false;
+                    }
+                });
+
+                ui.add_space(10.0);
+
+                ui.push_id("statue_table", |ui| {
+                    TableBuilder::new(ui)
+                        .striped(false)
+                        .clip(false)
+                        .column(Size::exact(150.0))
+                        .resizable(false)
+                        .header(25.0, |mut header| {
+                            header.col(|ui| {
+                                ui.heading("Statues");
+                            });
+                        })
+                        .body(|b| {
+                            b.rows(15.0, self.statue_config.statues.len(), |index, mut r| {
+                                let statue = &self.statue_config.statues[index];
+                                r.col(|ui| {
+                                    if statue.rarity == 1 {
+                                        ui.label(SPECIES_EN[statue.mons_id]);
+                                    } else {
+                                        ui.label(format!("{} - Rare", SPECIES_EN[statue.mons_id]));
+                                    }
+                                });
+                            });
+                        });
+                });
+            });
+        }
+
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.horizontal(|ui| {
                 ui.vertical(|ui| {
@@ -653,6 +744,10 @@ impl eframe::App for BDSPUgGeneratorUI {
                             ui.checkbox(&mut self.exclusive, "");
                             ui.end_row();
                         });
+                    if ui.button("Statues").clicked() {
+                        self.show_statues = true;
+                    }
+                    ui.add_space(5.0);
                     if ui.button("Search").clicked() {
                         if let Ok(s0) = u32::from_str_radix(&self.s0, 16) {
                             if let Ok(s1) = u32::from_str_radix(&self.s1, 16) {
@@ -707,6 +802,7 @@ impl eframe::App for BDSPUgGeneratorUI {
                                             self.room,
                                             filter,
                                             self.diglett_mode,
+                                            &self.statue_config,
                                         );
                                         let mut count = 0;
                                         for result in results.iter() {
@@ -982,7 +1078,5 @@ impl eframe::App for BDSPUgGeneratorUI {
                 });
             });
         });
-        #[cfg(not(target_arch = "wasm32"))]
-        _frame.set_window_size(ctx.used_size());
     }
 }

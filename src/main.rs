@@ -12,7 +12,7 @@ fn main() {
     let mut native_options = eframe::NativeOptions::default();
     native_options.vsync = false;
     native_options.resizable = false;
-    native_options.initial_window_size = Some(vec2(500.0, 500.0));
+    native_options.min_window_size = Some(vec2(500.0, 700.0));
     eframe::run_native(
         "BDSP Underground Generator",
         native_options,

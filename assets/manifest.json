@@ -1,6 +1,6 @@
 {
-  "name": "egui Template PWA",
-  "short_name": "egui-template-pwa",
+  "name": "BDSP Ug Generator PWA",
+  "short_name": "bdsp-ug-generator-pwa",
   "icons": [
     {
       "src": "./icon-256.png",
