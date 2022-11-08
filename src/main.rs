@@ -1,5 +1,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 use bdsp_ug_generator_ui::BDSPUgGeneratorUI;
+
+#[cfg(not(target_arch = "wasm32"))]
 use eframe::egui::vec2;
 
 #[cfg(target_arch = "wasm32")]

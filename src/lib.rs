@@ -791,9 +791,16 @@ impl eframe::App for BDSPUgGeneratorUI {
                                         };
 
                                         let mut rng = XorShift::from_state([s0, s1, s2, s3]);
-                                        rng.advance(
-                                            self.min_advances as usize + self.delay as usize,
-                                        );
+                                        if self.min_advances < 4096 {
+                                            rng.advance(
+                                                self.min_advances as usize + self.delay as usize,
+                                            );
+                                        } else {
+                                            rng.jump(
+                                                self.min_advances as usize + self.delay as usize,
+                                            );
+                                        }
+
                                         let results = run_results(
                                             self.max_advances,
                                             rng,
